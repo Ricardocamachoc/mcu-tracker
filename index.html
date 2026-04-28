@@ -580,7 +580,7 @@ async function runUpdate(){
   btn.disabled=true;
   btn.classList.add("loading");
   try{
-    var headers={"Content-Type":"application/json"};
+    var headers={"Content-Type":"application/json","anthropic-dangerous-direct-browser-access":"true"};
     var apiKey=localStorage.getItem("mcu-api-key");
     if(apiKey) headers["x-api-key"]=apiKey;
 
@@ -735,7 +735,7 @@ async function fetchSingleScore(id){
   try{
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":apiKey},
+      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-dangerous-direct-browser-access":"true"},
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",max_tokens:150,
         tools:[{"type":"web_search_20250305","name":"web_search"}],
@@ -762,7 +762,7 @@ async function fetchSeasonScore(id,seasonNum){
   try{
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":apiKey},
+      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-dangerous-direct-browser-access":"true"},
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",max_tokens:150,
         tools:[{"type":"web_search_20250305","name":"web_search"}],
@@ -787,7 +787,7 @@ async function fetchScoresForNewItems(newItems){
     var titles=newItems.map(function(i){return {id:i.id,title:i.title,year:i.year,type:i.type};});
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":apiKey},
+      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-dangerous-direct-browser-access":"true"},
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",max_tokens:600,
         tools:[{"type":"web_search_20250305","name":"web_search"}],
