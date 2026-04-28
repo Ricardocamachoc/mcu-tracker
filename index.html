@@ -140,6 +140,7 @@ h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-he
 .badge-movie{color:#60a5fa;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2)}
 .badge-series{color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2)}
 .badge-special{color:#fb923c;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2)}
+.badge-short{color:#c084fc;background:rgba(192,132,252,.08);border:1px solid rgba(192,132,252,.2)}
 .chevron{flex-shrink:0;color:#3a3a3a;transition:transform .2s,color .15s;display:flex;align-items:center;cursor:pointer;padding:4px}
 .item.exp .chevron{transform:rotate(180deg);color:#777}
 /* Episode panel */
@@ -214,6 +215,7 @@ var PHASES=[
   {num:3,label:"Phase 3",sub:"The Infinity War"},
   {num:4,label:"Phase 4",sub:"The Multiverse Saga Begins"},
   {num:5,label:"Phase 5",sub:"The Multiverse Saga"},
+  {num:6,label:"Phase 6",sub:"The Multiverse Saga Ends"},
 ];
 var BASE_ITEMS=[
   {id:1, title:"Iron Man",                                        year:2008,type:"movie",  phase:1},
@@ -268,14 +270,45 @@ var BASE_ITEMS=[
   {id:50,title:"Captain America: Brave New World",                year:2025,type:"movie",  phase:5},
   {id:51,title:"Daredevil: Born Again",                           year:2025,type:"series", phase:5},
   {id:52,title:"Thunderbolts*",                                   year:2025,type:"movie",  phase:5},
+  {id:53,title:"The Fantastic Four: First Steps",                  year:2025,type:"movie",  phase:6},
+  {id:54,title:"Spider-Man: Brand New Day",                         year:2026,type:"movie",  phase:6},
+  {id:55,title:"Avengers: Secret Wars",                             year:2027,type:"movie",  phase:6},
+  // One-Shots
+  {id:56,title:"One-Shot: The Consultant",                          year:2011,type:"short",  phase:1},
+  {id:57,title:"One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",year:2011,type:"short",phase:1},
+  {id:58,title:"One-Shot: Item 47",                                 year:2012,type:"short",  phase:1},
+  {id:59,title:"One-Shot: Agent Carter",                            year:2013,type:"short",  phase:2},
+  {id:60,title:"One-Shot: All Hail the King",                       year:2014,type:"short",  phase:2},
+  {id:61,title:"Team Thor",                                         year:2016,type:"short",  phase:3},
+  {id:62,title:"Team Thor: Part 2",                                 year:2017,type:"short",  phase:3},
+  {id:63,title:"Team Darryl",                                       year:2018,type:"short",  phase:3},
+  // Phase 4 missing
+  {id:64,title:"I Am Groot",                                        year:2022,type:"series", phase:4},
+  {id:65,title:"The Guardians of the Galaxy Holiday Special",       year:2022,type:"special",phase:4},
+  // Phase 5 missing
+  {id:66,title:"I Am Groot Season 2",                               year:2023,type:"series", phase:5},
+  {id:67,title:"What If...? Season 3",                              year:2024,type:"series", phase:5},
+  {id:68,title:"X-Men '97",                                         year:2024,type:"series", phase:5},
+  // Phase 6 missing
+  {id:69,title:"Ironheart",                                         year:2025,type:"series", phase:6},
+  {id:70,title:"Eyes of Wakanda",                                   year:2025,type:"series", phase:6},
+  {id:71,title:"Marvel Zombies",                                    year:2025,type:"series", phase:6},
 ];
 var SD={
   24:[{s:1,n:9}],25:[{s:1,n:6}],26:[{s:1,n:6}],28:[{s:1,n:9}],
   31:[{s:1,n:6}],33:[{s:1,n:6}],35:[{s:1,n:6}],37:[{s:1,n:9}],
   42:[{s:1,n:6}],43:[{s:2,n:6}],45:[{s:2,n:9}],46:[{s:1,n:5}],
   47:[{s:1,n:9}],49:[{s:1,n:10}],51:[{s:1,n:9}],
+  // New series
+  64:[{s:1,n:5}],   // I Am Groot S1
+  66:[{s:2,n:5}],   // I Am Groot S2
+  67:[{s:3,n:9}],   // What If...? S3
+  68:[{s:1,n:10}],  // X-Men '97
+  69:[{s:1,n:6}],   // Ironheart
+  70:[{s:1,n:4}],   // Eyes of Wakanda
+  71:[{s:1,n:4}],   // Marvel Zombies
 };
-var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"},special:{l:"SPECIAL",c:"badge-special"}};
+var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"},special:{l:"SPECIAL",c:"badge-special"},short:{l:"SHORT",c:"badge-short"}};
 
 // ── STATE ─────────────────────────────────────────────
 var ms={},ep={},exp={},fil="all";
@@ -284,9 +317,10 @@ var customItems=[];  // items added via update
 function allItems(){return BASE_ITEMS.concat(customItems);}
 
 function allPhases(){
-  var maxPhase=Math.max.apply(null,allItems().map(function(i){return i.phase;}));
   var phases=PHASES.slice();
-  for(var p=6;p<=maxPhase;p++){
+  var maxPhase=Math.max.apply(null,allItems().map(function(i){return i.phase;}));
+  var knownNums=phases.map(function(p){return p.num;});
+  for(var p=Math.max.apply(null,knownNums)+1;p<=maxPhase;p++){
     phases.push({num:p,label:"Phase "+p,sub:"New Content"});
   }
   return phases;
@@ -396,11 +430,10 @@ function renderNextRelease(){
 // ── KNOWN UPCOMING RELEASES ───────────────────────────
 // Update this list as new MCU content is announced
 var UPCOMING = [
-  {title:"Avengers: Doomsday",    date:"2026-05-01"},
-  {title:"Avengers: Secret Wars", date:"2027-05-07"},
-  {title:"Fantastic Four",        date:"2025-07-25"},
-  {title:"Shang-Chi 2",           date:"2026-02-13"},
-  {title:"Armor Wars",            date:"2026-06-05"},
+  {title:"Spider-Man: Brand New Day",   date:"2026-07-31"},
+  {title:"The Punisher: One Last Kill", date:"2026-05-12"},
+  {title:"Avengers: Doomsday",          date:"2026-12-18"},
+  {title:"Avengers: Secret Wars",       date:"2027-12-17"},
 ];
 
 function getNextUpcoming(){
@@ -670,7 +703,7 @@ function render(){
 
   var foot=document.createElement("div");
   foot.id="footer";
-  foot.textContent="MARVEL CINEMATIC UNIVERSE · "+items.length+" TITLES";
+  foot.textContent="MARVEL CINEMATIC UNIVERSE · PHASES 1–6 · "+items.length+" TITLES";
   c.appendChild(foot);
 
   var total=items.length;
