@@ -19,7 +19,10 @@
       <div id="stats">0 / 52 WATCHED · 0%</div>
     </div>
     <div class="header-btns">
-      <button id="update-btn" onclick="checkForUpdates()">⟳ UPDATE LIST</button>
+      <div id="update-wrap">
+        <button id="update-btn" onclick="checkForUpdates()">⟳ UPDATE LIST</button>
+        <div id="next-release"></div>
+      </div>
     </div>
   </div>
   <div class="header-row2">
@@ -33,7 +36,32 @@
 </div>
 
 <div id="toast"></div>
+<div id="next-release"></div>
 <div id="content"></div>
+
+<!-- Confirm re-check modal -->
+<div id="confirm-overlay" class="hidden" onclick="if(event.target===this)closeConfirm()">
+  <div id="confirm-modal">
+    <div id="confirm-title">CHECK FOR UPDATES?</div>
+    <div id="confirm-body"></div>
+    <div id="confirm-btns">
+      <button onclick="closeConfirm()">CANCEL</button>
+      <button id="confirm-yes" onclick="closeConfirm();runUpdate()">CHECK ANYWAY</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm modal -->
+<div id="confirm-overlay" class="hidden" onclick="if(event.target===this)closeConfirm()">
+  <div id="confirm-modal">
+    <div id="confirm-title">CHECK FOR UPDATES?</div>
+    <div id="confirm-body"></div>
+    <div id="confirm-btns">
+      <button onclick="closeConfirm()">CANCEL</button>
+      <button id="confirm-ok" onclick="confirmUpdate()">YES, CHECK NOW</button>
+    </div>
+  </div>
+</div>
 
 <!-- API key modal -->
 <div id="key-overlay" class="hidden" onclick="if(event.target===this)closeKeyModal()">
@@ -128,6 +156,20 @@ h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-he
 .hidden{display:none!important}
 #footer{text-align:center;font-size:10px;color:#282828;font-weight:600;letter-spacing:2px;margin-top:16px}
 
+/* Next release label */
+#update-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+#next-release{font-size:10px;font-weight:700;letter-spacing:.8px;color:rgba(255,255,255,.45);text-align:right;white-space:nowrap}
+#next-release.soon{color:var(--gold)}
+/* Confirm modal */
+#confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px}
+#confirm-modal{background:#161616;border:2px solid #333;border-radius:6px;padding:24px 20px;max-width:340px;width:100%}
+#confirm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red);margin-bottom:10px}
+#confirm-body{font-size:14px;color:#888;font-weight:500;line-height:1.6;margin-bottom:20px}
+#confirm-body strong{color:#ccc}
+#confirm-btns{display:flex;gap:8px}
+#confirm-btns button{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:9px;border-radius:3px;cursor:pointer}
+#confirm-btns button:first-child{background:transparent;border:2px solid #444;color:#888}
+#confirm-ok{background:var(--red);border:2px solid var(--red);color:#fff}
 /* API Key Modal */
 #key-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px}
 #key-modal{background:#161616;border:2px solid #333;border-radius:6px;padding:24px 20px;max-width:360px;width:100%}
@@ -142,6 +184,26 @@ h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-he
 #key-save-btn{background:var(--red);border:2px solid var(--red);color:#fff}
 #key-clear-wrap{margin-top:14px;text-align:center}
 #key-clear-btn{background:none;border:none;color:#444;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;text-decoration:underline}
+
+/* Next release bar */
+#next-release{max-width:680px;margin:12px auto 0;padding:0 14px}
+.nr-bar{display:flex;align-items:center;gap:10px;background:#141414;border:1px solid #262626;border-left:3px solid var(--gold);border-radius:4px;padding:9px 14px}
+.nr-label{font-family:'Bebas Neue',sans-serif;font-size:12px;color:#555;letter-spacing:2px;flex-shrink:0}
+.nr-title{flex:1;font-size:13px;font-weight:700;color:#c8c8c8;letter-spacing:.3px}
+.nr-date{font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;letter-spacing:.5px}
+.nr-soon{color:var(--red)!important}
+
+/* Confirm modal */
+#confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px}
+#confirm-modal{background:#161616;border:2px solid #333;border-radius:6px;padding:22px 20px;max-width:320px;width:100%}
+#confirm-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--red);margin-bottom:10px}
+#confirm-body{font-size:13px;color:#888;font-weight:500;line-height:1.6;margin-bottom:18px}
+#confirm-body strong{color:#ccc}
+#confirm-btns{display:flex;gap:8px}
+#confirm-btns button{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:9px;border-radius:3px;cursor:pointer}
+#confirm-btns button:first-child{background:transparent;border:2px solid #444;color:#777}
+#confirm-yes{background:var(--red);border:2px solid var(--red);color:#fff}
+
 </style>
 
 <script>
@@ -298,6 +360,72 @@ function applyFilter(){
   });
 }
 
+// ── UPCOMING RELEASES ──────────────────────────────────
+// Known upcoming MCU releases — update this list when running a check
+var UPCOMING = [
+  {title:"Avengers: Doomsday",       date:"2026-05-01", type:"movie"},
+  {title:"Avengers: Secret Wars",    date:"2027-05-07", type:"movie"},
+  {title:"Ironheart",                date:"2025-06-24", type:"series"},
+  {title:"Vision",                   date:"2026-01-01", type:"series"},
+];
+
+function renderNextRelease(){
+  var el=document.getElementById("next-release");
+  if(!el)return;
+  var now=new Date();
+  // Filter out titles already in the list
+  var existing=allItems().map(function(i){return i.title.toLowerCase();});
+  var future=UPCOMING.filter(function(u){
+    return new Date(u.date)>=now && !existing.includes(u.title.toLowerCase());
+  });
+  if(!future.length){el.innerHTML="";return;}
+  future.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  var next=future[0];
+  var d=new Date(next.date);
+  var months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  var dateStr=months[d.getMonth()]+" "+d.getFullYear();
+  var daysLeft=Math.ceil((d-now)/(1000*60*60*24));
+  var soon=daysLeft<=60;
+  el.innerHTML='<div class="nr-bar">'
+    +'<span class="nr-label">NEXT UP</span>'
+    +'<span class="nr-title">'+next.title+'</span>'
+    +'<span class="nr-date'+(soon?" nr-soon":"")+'">'+(soon?daysLeft+"d away":dateStr)+'</span>'
+    +'</div>';
+}
+
+// ── KNOWN UPCOMING RELEASES ───────────────────────────
+// Update this list as new MCU content is announced
+var UPCOMING = [
+  {title:"Avengers: Doomsday",    date:"2026-05-01"},
+  {title:"Avengers: Secret Wars", date:"2027-05-07"},
+  {title:"Fantastic Four",        date:"2025-07-25"},
+  {title:"Shang-Chi 2",           date:"2026-02-13"},
+  {title:"Armor Wars",            date:"2026-06-05"},
+];
+
+function getNextUpcoming(){
+  var now=new Date();
+  var future=UPCOMING.filter(function(u){return new Date(u.date)>now;});
+  if(!future.length)return null;
+  future.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  return future[0];
+}
+
+function formatDate(dateStr){
+  var d=new Date(dateStr+"T12:00:00");
+  return d.toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric"});
+}
+
+function updateNextReleaseLabel(){
+  var el=document.getElementById("next-release");
+  if(!el)return;
+  var next=getNextUpcoming();
+  if(!next){el.textContent="";return;}
+  var daysUntil=Math.ceil((new Date(next.date+"T12:00:00")-new Date())/(1000*60*60*24));
+  el.textContent="Next: "+next.title+" · "+formatDate(next.date);
+  el.className=daysUntil<=60?"soon":"";
+}
+
 // ── API KEY MODAL ──────────────────────────────────────
 function openKeyModal(){
   var k=localStorage.getItem("mcu-api-key")||"";
@@ -321,12 +449,43 @@ function clearKey(){
   showToast("API key removed");
 }
 
-// ── UPDATE VIA API ─────────────────────────────────────
-function checkForUpdates(){
+// ── CONFIRM MODAL ──────────────────────────────────────
+function openConfirm(lastChecked){
+  var days=Math.floor((Date.now()-lastChecked)/(1000*60*60*24));
+  var body=document.getElementById("confirm-body");
+  body.innerHTML="Last checked <strong>"+days+" day"+(days!==1?"s":"")+" ago</strong>.<br><br>"
+    +"Each check uses a small amount of API credits. Are you sure you want to check now?";
+  document.getElementById("confirm-overlay").classList.remove("hidden");
+}
+function closeConfirm(){document.getElementById("confirm-overlay").classList.add("hidden");}
+function confirmUpdate(){
+  closeConfirm();
   var apiKey=localStorage.getItem("mcu-api-key");
-  if(!apiKey && window.location.hostname!=="claude.ai"){
-    openKeyModal(); return;
+  if(!apiKey&&window.location.hostname!=="claude.ai"){openKeyModal();return;}
+  runUpdate();
+}
+
+// ── UPDATE VIA API ─────────────────────────────────────
+var CHECK_INTERVAL_DAYS=30;
+
+function checkForUpdates(){
+  var lastChecked=parseInt(localStorage.getItem("mcu-last-check")||"0");
+  var daysSince=Math.floor((Date.now()-lastChecked)/(1000*60*60*24));
+  var apiKey=localStorage.getItem("mcu-api-key");
+
+  // Never checked before → go straight through
+  if(!lastChecked){
+    if(!apiKey&&window.location.hostname!=="claude.ai"){openKeyModal();return;}
+    runUpdate(); return;
   }
+
+  // Recent check → ask for confirmation
+  if(daysSince<CHECK_INTERVAL_DAYS){
+    openConfirm(lastChecked); return;
+  }
+
+  // Old enough → run without confirmation
+  if(!apiKey&&window.location.hostname!=="claude.ai"){openKeyModal();return;}
   runUpdate();
 }
 
@@ -363,10 +522,7 @@ async function runUpdate(){
       var errText=await res.text();
       var msg="HTTP "+res.status;
       try{var j=JSON.parse(errText);if(j.error&&j.error.message)msg=j.error.message;}catch(e){}
-      if(res.status===401||res.status===403){
-        showToast("Auth failed — check your API key");
-        openKeyModal(); return;
-      }
+      if(res.status===401||res.status===403){showToast("Auth failed — check your API key");openKeyModal();return;}
       throw new Error(msg);
     }
 
@@ -381,6 +537,9 @@ async function runUpdate(){
     var newItems;
     try{newItems=JSON.parse(match[0]);}
     catch(e){throw new Error("Couldn't parse JSON: "+e.message);}
+
+    // Record successful check time
+    localStorage.setItem("mcu-last-check", Date.now().toString());
 
     if(!Array.isArray(newItems)||newItems.length===0){showToast("Already up to date ✓");return;}
 
@@ -525,7 +684,7 @@ function render(){
   });
 }
 
-load();render();
+load();render();updateNextReleaseLabel();renderNextRelease();
 </script>
 </body>
 </html>
