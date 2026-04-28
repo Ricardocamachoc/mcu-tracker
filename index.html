@@ -580,7 +580,7 @@ async function runUpdate(){
   btn.disabled=true;
   btn.classList.add("loading");
   try{
-    var headers={"Content-Type":"application/json","anthropic-dangerous-direct-browser-access":"true"};
+    var headers={"Content-Type":"application/json","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"};
     var apiKey=localStorage.getItem("mcu-api-key");
     if(apiKey) headers["x-api-key"]=apiKey;
 
@@ -735,7 +735,7 @@ async function fetchSingleScore(id){
   try{
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-dangerous-direct-browser-access":"true"},
+      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",max_tokens:150,
         tools:[{"type":"web_search_20250305","name":"web_search"}],
@@ -762,7 +762,7 @@ async function fetchSeasonScore(id,seasonNum){
   try{
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-dangerous-direct-browser-access":"true"},
+      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",max_tokens:150,
         tools:[{"type":"web_search_20250305","name":"web_search"}],
@@ -787,7 +787,7 @@ async function fetchScoresForNewItems(newItems){
     var titles=newItems.map(function(i){return {id:i.id,title:i.title,year:i.year,type:i.type};});
     var res=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-dangerous-direct-browser-access":"true"},
+      headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
       body:JSON.stringify({
         model:"claude-haiku-4-5-20251001",max_tokens:600,
         tools:[{"type":"web_search_20250305","name":"web_search"}],
@@ -818,6 +818,7 @@ function render(){
   c.innerHTML="";
   var items=allItems();
   var phases=allPhases();
+  var renderIdx=0;
 
   phases.forEach(function(phase){
     var phaseItems=items.filter(function(i){return i.phase===phase.num;});
@@ -835,6 +836,7 @@ function render(){
     sec.appendChild(hdr);
 
     phaseItems.forEach(function(item){
+      renderIdx++;
       var watched=isSeen(item);
       var isSer=(item.type==="series"||item.type==="tv")&&hasSeries(item.id);
       var isExp=!!exp[item.id];
@@ -856,7 +858,7 @@ function render(){
       row.className="item"+(watched?" watched":"")+(isExp?" exp":"")+(isNew?" new-item":"");
       row.setAttribute("data-watched",watched?"1":"0");
       row.innerHTML=
-        '<span class="item-num">'+item.id+'</span>'
+        '<span class="item-num">'+renderIdx+'</span>'
         +'<div class="chk" onclick="event.stopPropagation();'+(isSer?"toggleSeries("+item.id+")":"toggleMovie("+item.id+")")+'">'
         +'<svg class="chkmark" width="10" height="8" viewBox="0 0 10 8" fill="none">'
         +'<path d="M1 3.5L3.8 7L9 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
