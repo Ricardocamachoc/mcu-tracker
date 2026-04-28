@@ -136,11 +136,23 @@ h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-he
 .ep-cnt{font-size:11px;font-weight:700;color:#484848;flex-shrink:0}
 .ep-cnt.partial{color:var(--gold);opacity:.8}
 .item-yr{font-size:11px;color:#444;font-weight:500;flex-shrink:0}
+.imdb-badge{font-size:10px;font-weight:700;letter-spacing:.3px;padding:2px 6px;border-radius:2px;flex-shrink:0;font-family:'Barlow Condensed',sans-serif}
+.imdb-great{color:#22c55e;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25)}
+.imdb-ok{color:#facc15;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.25)}
+.imdb-bad{color:#f87171;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25)}
+.imdb-none{color:#3a3a3a;background:rgba(255,255,255,.03);border:1px solid #2a2a2a;cursor:pointer}
+.ep-bub{width:40px;height:40px;border-radius:50%;border:2px solid #2a2a2a;background:transparent;color:#444;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0}
+.ep-bub:active{transform:scale(.88)}
+.ep-bub.seen{background:var(--red);border-color:var(--red);color:#fff}
+
+.score-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.season-score{font-size:11px;font-weight:700;letter-spacing:.3px;padding:2px 7px;border-radius:2px;font-family:'Barlow Condensed',sans-serif}
 .badge{font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 7px;border-radius:2px;min-width:52px;text-align:center;flex-shrink:0}
 .badge-movie{color:#60a5fa;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2)}
 .badge-series{color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2)}
 .badge-special{color:#fb923c;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2)}
 .badge-short{color:#c084fc;background:rgba(192,132,252,.08);border:1px solid rgba(192,132,252,.2)}
+.badge-tv{color:#38bdf8;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2)}
 .chevron{flex-shrink:0;color:#3a3a3a;transition:transform .2s,color .15s;display:flex;align-items:center;cursor:pointer;padding:4px}
 .item.exp .chevron{transform:rotate(180deg);color:#777}
 /* Episode panel */
@@ -148,9 +160,7 @@ h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-he
 .season-blk+.season-blk{margin-top:18px}
 .season-ttl{font-family:'Bebas Neue',sans-serif;font-size:12px;color:#444;letter-spacing:2px;margin-bottom:10px}
 .ep-grid{display:flex;flex-wrap:wrap;gap:8px}
-.ep-bub{width:40px;height:40px;border-radius:50%;border:2px solid #2a2a2a;background:transparent;color:#444;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0}
-.ep-bub:active{transform:scale(.88)}
-.ep-bub.seen{background:var(--red);border-color:var(--red);color:#fff}
+/* ep-bub now defined above */
 .ep-foot{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:11px;color:#3a3a3a;font-weight:600;letter-spacing:1px}
 .ep-bar{flex:1;height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden}
 .ep-bar-fill{height:100%;background:var(--red);border-radius:2px;transition:width .2s}
@@ -293,6 +303,25 @@ var BASE_ITEMS=[
   {id:69,title:"Ironheart",                                         year:2025,type:"series", phase:6},
   {id:70,title:"Eyes of Wakanda",                                   year:2025,type:"series", phase:6},
   {id:71,title:"Marvel Zombies",                                    year:2025,type:"series", phase:6},
+  // ── Marvel Television (Netflix + ABC) ─────────────────────────────
+  // Phase 2
+  {id:72,title:"Agents of S.H.I.E.L.D.",                           year:2013,type:"tv",     phase:2},
+  {id:73,title:"Daredevil Season 1",                                year:2015,type:"tv",     phase:2},
+  {id:74,title:"Jessica Jones Season 1",                            year:2015,type:"tv",     phase:2},
+  {id:75,title:"Agent Carter Season 1",                             year:2015,type:"tv",     phase:2},
+  // Phase 3
+  {id:76,title:"Agent Carter Season 2",                             year:2016,type:"tv",     phase:3},
+  {id:77,title:"Daredevil Season 2",                                year:2016,type:"tv",     phase:3},
+  {id:78,title:"Luke Cage Season 1",                                year:2016,type:"tv",     phase:3},
+  {id:79,title:"Iron Fist Season 1",                                year:2017,type:"tv",     phase:3},
+  {id:80,title:"The Defenders",                                     year:2017,type:"tv",     phase:3},
+  {id:81,title:"The Punisher Season 1",                             year:2017,type:"tv",     phase:3},
+  {id:82,title:"Jessica Jones Season 2",                            year:2018,type:"tv",     phase:3},
+  {id:83,title:"Luke Cage Season 2",                                year:2018,type:"tv",     phase:3},
+  {id:84,title:"Iron Fist Season 2",                                year:2018,type:"tv",     phase:3},
+  {id:85,title:"Daredevil Season 3",                                year:2018,type:"tv",     phase:3},
+  {id:86,title:"The Punisher Season 2",                             year:2019,type:"tv",     phase:3},
+  {id:87,title:"Jessica Jones Season 3",                            year:2019,type:"tv",     phase:3},
 ];
 var SD={
   24:[{s:1,n:9}],25:[{s:1,n:6}],26:[{s:1,n:6}],28:[{s:1,n:9}],
@@ -307,11 +336,29 @@ var SD={
   69:[{s:1,n:6}],   // Ironheart
   70:[{s:1,n:4}],   // Eyes of Wakanda
   71:[{s:1,n:4}],   // Marvel Zombies
+  // Marvel Television
+  72:[{s:1,n:22},{s:2,n:22},{s:3,n:22},{s:4,n:22},{s:5,n:22},{s:6,n:13},{s:7,n:13}], // AoS
+  73:[{s:1,n:13}], // Daredevil S1
+  74:[{s:1,n:13}], // Jessica Jones S1
+  75:[{s:1,n:8}],  // Agent Carter S1
+  76:[{s:2,n:10}], // Agent Carter S2
+  77:[{s:2,n:13}], // Daredevil S2
+  78:[{s:1,n:13}], // Luke Cage S1
+  79:[{s:1,n:13}], // Iron Fist S1
+  80:[{s:1,n:8}],  // The Defenders
+  81:[{s:1,n:13}], // The Punisher S1
+  82:[{s:2,n:13}], // Jessica Jones S2
+  83:[{s:2,n:13}], // Luke Cage S2
+  84:[{s:2,n:10}], // Iron Fist S2
+  85:[{s:3,n:13}], // Daredevil S3
+  86:[{s:2,n:13}], // The Punisher S2
+  87:[{s:3,n:13}], // Jessica Jones S3
 };
-var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"},special:{l:"SPECIAL",c:"badge-special"},short:{l:"SHORT",c:"badge-short"}};
+var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"},special:{l:"SPECIAL",c:"badge-special"},short:{l:"SHORT",c:"badge-short"},tv:{l:"TV",c:"badge-tv"}};
 
 // ── STATE ─────────────────────────────────────────────
 var ms={},ep={},exp={},fil="all";
+var sc={};  // scores: {"movie-ID": 7.9, "ep-ID-S-E": 8.2}
 var customItems=[];  // items added via update
 
 function allItems(){return BASE_ITEMS.concat(customItems);}
@@ -330,6 +377,11 @@ function load(){
   try{
     var d=JSON.parse(localStorage.getItem("mcu3")||"{}");
     ms=d.ms||{};ep=d.ep||{};
+    // Merge: BASE_SCORES as defaults, saved scores override
+    sc={};
+    Object.keys(BASE_SCORES).forEach(function(k){if(BASE_SCORES[k])sc[k]=BASE_SCORES[k];});
+    var saved=d.sc||{};
+    Object.keys(saved).forEach(function(k){sc[k]=saved[k];});
     customItems=d.customItems||[];
     // Merge any custom series data
     if(d.customSD){
@@ -342,13 +394,13 @@ function save(){
   customItems.forEach(function(item){
     if(SD[item.id]) customSD[item.id]=SD[item.id];
   });
-  try{localStorage.setItem("mcu3",JSON.stringify({ms:ms,ep:ep,customItems:customItems,customSD:customSD}));}catch(e){}
+  try{localStorage.setItem("mcu3",JSON.stringify({ms:ms,ep:ep,sc:sc,customItems:customItems,customSD:customSD}));}catch(e){}
 }
 
 // ── LOGIC ─────────────────────────────────────────────
 function hasSeries(id){return !!SD[id];}
 function isSeen(item){
-  if(item.type!=="series"||!hasSeries(item.id))return !!ms[item.id];
+  if((item.type!=="series"&&item.type!=="tv")||!hasSeries(item.id))return !!ms[item.id];
   return SD[item.id].every(function(s){
     for(var e=1;e<=s.n;e++){if(!ep[item.id+"-"+s.s+"-"+e])return false;}
     return true;
@@ -593,6 +645,7 @@ async function runUpdate(){
     customItems=customItems.concat(fresh);
     save();render();
     showToast("Added "+fresh.length+" new title"+(fresh.length>1?"s":"")+" ✓","success");
+    fetchScoresForNewItems(fresh);
 
   }catch(e){
     showToast("Error: "+e.message);
@@ -613,6 +666,152 @@ function showToast(msg,type){
 }
 
 // ── RENDER ─────────────────────────────────────────────
+// ── SCORES ─────────────────────────────────────────────
+// Keys: "m-{id}" for movies/shorts/specials, "s-{id}-{season}" for series seasons
+var BASE_SCORES={
+  // Phase 1 – movies
+  "m-1":"7.9","m-2":"6.7","m-3":"7.0","m-4":"7.0","m-5":"6.9","m-6":"8.0",
+  // Phase 2 – movies
+  "m-7":"7.1","m-8":"6.8","m-9":"7.7","m-10":"8.0","m-11":"7.3","m-12":"7.3",
+  // Phase 3 – movies
+  "m-13":"7.8","m-14":"7.5","m-15":"7.6","m-16":"7.4","m-17":"7.9","m-18":"7.3",
+  "m-19":"8.4","m-20":"7.0","m-21":"6.8","m-22":"8.4","m-23":"7.4",
+  // Phase 4
+  "s-24-1":"7.9","s-25-1":"7.2","s-26-1":"8.2","m-27":"6.7","s-28-1":"7.4",
+  "m-29":"7.4","m-30":"6.3","s-31-1":"7.5","m-32":"8.2","s-33-1":"7.3",
+  "m-34":"6.9","s-35-1":"6.5","m-36":"6.3","s-37-1":"5.1","m-38":"7.2","m-39":"6.7",
+  // Phase 5
+  "m-40":"6.1","m-41":"7.9","s-42-1":"6.0","s-43-2":"8.3","m-44":"5.4",
+  "s-45-2":"7.1","s-46-1":"5.8","s-47-1":"7.0","m-48":"7.8",
+  "s-49-1":"7.2","m-50":"5.9","s-51-1":"7.6","m-52":"7.2",
+  // Phase 6
+  "m-53":"7.4",
+  // Animated series
+  "s-64-1":"6.5","s-66-2":"6.3","s-67-3":"7.0","s-68-1":"8.6",
+  "s-69-1":"5.5","s-70-1":"6.8","s-71-1":"7.0",
+  // Netflix / ABC – TV
+  "s-72-1":"7.5","s-72-2":"8.0","s-72-3":"7.8","s-72-4":"7.8","s-72-5":"7.8","s-72-6":"7.2","s-72-7":"7.2",
+  "s-73-1":"8.7","s-74-1":"8.0","s-75-1":"7.9",
+  "s-76-2":"7.3","s-77-2":"8.2","s-78-1":"7.3","s-79-1":"6.4",
+  "s-80-1":"7.1","s-81-1":"8.5","s-82-2":"6.9","s-83-2":"7.0",
+  "s-84-2":"6.8","s-85-3":"8.6","s-86-2":"7.9","s-87-3":"6.6",
+};
+
+function scoreClass(s){
+  if(!s||s==="null") return "imdb-none";
+  var n=parseFloat(s);
+  if(n>=7.5) return "imdb-great";
+  if(n>=6.0) return "imdb-ok";
+  return "imdb-bad";
+}
+function getScore(key){ return sc[key]||null; }
+
+function movieScoreHtml(id){
+  var s=getScore("m-"+id);
+  if(s&&s!=="null") return '<span class="imdb-badge '+scoreClass(s)+'">&#11088; '+s+'</span>';
+  return '<span class="imdb-badge imdb-none" onclick="event.stopPropagation();fetchSingleScore('+id+')">&#11088; &ndash;</span>';
+}
+function seriesScoreHtml(id){
+  // Show first season score on collapsed row
+  var seasons=SD[id];
+  if(!seasons||!seasons.length) return '';
+  var firstS=seasons[0].s;
+  var s=getScore("s-"+id+"-"+firstS);
+  if(s&&s!=="null") return '<span class="imdb-badge '+scoreClass(s)+'">&#11088; '+s+'</span>';
+  return '<span class="imdb-badge imdb-none" onclick="event.stopPropagation();fetchSeasonScore('+id+','+firstS+')">&#11088; &ndash;</span>';
+}
+function seasonScoreHtml(id,seasonNum){
+  var s=getScore("s-"+id+"-"+seasonNum);
+  if(s&&s!=="null") return '<span class="imdb-badge season-score '+scoreClass(s)+'">&#11088; '+s+'</span>';
+  return '<span class="imdb-badge imdb-none season-score" onclick="event.stopPropagation();fetchSeasonScore('+id+','+seasonNum+')">&#11088; &ndash;</span>';
+}
+
+async function fetchSingleScore(id){
+  var item=allItems().find(function(i){return i.id===id;});
+  if(!item)return;
+  var apiKey=localStorage.getItem("mcu-api-key");
+  if(!apiKey){openKeyModal();return;}
+  showToast("Fetching score...");
+  try{
+    var res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","x-api-key":apiKey},
+      body:JSON.stringify({
+        model:"claude-haiku-4-5-20251001",max_tokens:150,
+        tools:[{"type":"web_search_20250305","name":"web_search"}],
+        messages:[{role:"user",content:'Find the IMDb rating for "'+item.title+'" ('+item.year+'). Return ONLY JSON: {"score":"7.9"} no markdown.'}]
+      })
+    });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    var data=await res.json();
+    var text=data.content.filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("");
+    text=text.replace(/```[a-z]*\n?/g,"").replace(/```/g,"");
+    var match=text.match(/\{[^}]*\}/);
+    if(!match) throw new Error("No JSON");
+    var obj=JSON.parse(match[0]);
+    if(obj.score){sc["m-"+id]=String(obj.score);save();render();}
+  }catch(e){showToast("Error: "+e.message);}
+}
+
+async function fetchSeasonScore(id,seasonNum){
+  var item=allItems().find(function(i){return i.id===id;});
+  if(!item)return;
+  var apiKey=localStorage.getItem("mcu-api-key");
+  if(!apiKey){openKeyModal();return;}
+  showToast("Fetching score...");
+  try{
+    var res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","x-api-key":apiKey},
+      body:JSON.stringify({
+        model:"claude-haiku-4-5-20251001",max_tokens:150,
+        tools:[{"type":"web_search_20250305","name":"web_search"}],
+        messages:[{role:"user",content:'Find the IMDb rating for "'+item.title+'" Season '+seasonNum+'. Return ONLY JSON: {"score":"8.2"} no markdown.'}]
+      })
+    });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    var data=await res.json();
+    var text=data.content.filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("");
+    text=text.replace(/```[a-z]*\n?/g,"").replace(/```/g,"");
+    var match=text.match(/\{[^}]*\}/);
+    if(!match) throw new Error("No JSON");
+    var obj=JSON.parse(match[0]);
+    if(obj.score){sc["s-"+id+"-"+seasonNum]=String(obj.score);save();render();}
+  }catch(e){showToast("Error: "+e.message);}
+}
+
+async function fetchScoresForNewItems(newItems){
+  var apiKey=localStorage.getItem("mcu-api-key");
+  if(!apiKey||!newItems||!newItems.length)return;
+  try{
+    var titles=newItems.map(function(i){return {id:i.id,title:i.title,year:i.year,type:i.type};});
+    var res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","x-api-key":apiKey},
+      body:JSON.stringify({
+        model:"claude-haiku-4-5-20251001",max_tokens:600,
+        tools:[{"type":"web_search_20250305","name":"web_search"}],
+        messages:[{role:"user",content:'Search IMDb ratings for these MCU titles: '+JSON.stringify(titles)+'. Return ONLY a JSON array: [{"id":53,"score":"7.4"},{"id":54,"s":1,"score":"8.7"},...]. Include "s" field for series season number. No markdown.'}]
+      })
+    });
+    if(!res.ok)return;
+    var data=await res.json();
+    var text=data.content.filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("");
+    text=text.replace(/```[a-z]*\n?/g,"").replace(/```/g,"");
+    var match=text.match(/\[[\s\S]*\]/);
+    if(!match)return;
+    var scores=JSON.parse(match[0]);
+    scores.forEach(function(entry){
+      if(!entry.score||entry.score==="null")return;
+      if(entry.s) sc["s-"+entry.id+"-"+entry.s]=String(entry.score);
+      else sc["m-"+entry.id]=String(entry.score);
+    });
+    save();
+  }catch(e){}
+}
+
+
+
 function render(){
   var st=document.documentElement.scrollTop||document.body.scrollTop;
   var c=document.getElementById("content");
@@ -637,7 +836,7 @@ function render(){
 
     phaseItems.forEach(function(item){
       var watched=isSeen(item);
-      var isSer=item.type==="series"&&hasSeries(item.id);
+      var isSer=(item.type==="series"||item.type==="tv")&&hasSeries(item.id);
       var isExp=!!exp[item.id];
       var prog=isSer?getProgress(item.id):null;
       var b=BADGE[item.type]||{l:"OTHER",c:"badge-special"};
@@ -664,6 +863,7 @@ function render(){
         +'<span class="item-title"'+(isSer?' onclick="toggleExp('+item.id+')" style="cursor:pointer"':'')+'>'+item.title+'</span>'
         +epHtml
         +'<span class="item-yr">'+item.year+'</span>'
+        +(item.type==="short"?'':isSer?seriesScoreHtml(item.id):movieScoreHtml(item.id))
         +'<span class="badge '+b.c+'">'+b.l+'</span>'
         +chevHtml;
       sec.appendChild(row);
@@ -674,7 +874,10 @@ function render(){
         SD[item.id].forEach(function(season){
           var blk=document.createElement("div");
           blk.className="season-blk";
-          blk.innerHTML='<div class="season-ttl">SEASON '+season.s+'</div>';
+          var isFirstSeason=(season.s===SD[item.id][0].s);
+          blk.innerHTML='<div class="score-row"><div class="season-ttl">SEASON '+season.s+'</div>'
+            +seasonScoreHtml(item.id,season.s)
+            +'</div>';
           var grid=document.createElement("div");
           grid.className="ep-grid";
           for(var e=1;e<=season.n;e++){
@@ -703,7 +906,7 @@ function render(){
 
   var foot=document.createElement("div");
   foot.id="footer";
-  foot.textContent="MARVEL CINEMATIC UNIVERSE · PHASES 1–6 · "+items.length+" TITLES";
+  foot.innerHTML="MARVEL CINEMATIC UNIVERSE · PHASES 1–6 · "+items.length+" TITLES<br><span style='font-size:9px;opacity:.5;letter-spacing:1px'>⭐ IMDB SCORES COLLECTED 28 APR 2026</span>";
   c.appendChild(foot);
 
   var total=items.length;
