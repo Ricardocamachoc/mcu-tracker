@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <link rel="apple-touch-icon" href="data:image/png;base64,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"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="MCU Tracker"/>
+  <title>MCU Watch Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="header">
+  <div class="header-row1">
+    <div>
+      <h1>MCU WATCH TRACKER</h1>
+      <div id="stats">0 / 52 WATCHED · 0%</div>
+    </div>
+    <div class="header-btns">
+      <button id="update-btn" onclick="checkForUpdates()">⟳ UPDATE LIST</button>
+    </div>
+  </div>
+  <div class="header-row2">
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('all')">ALL</button>
+      <button class="filter-btn" onclick="setFilter('unseen')">TO WATCH</button>
+      <button class="filter-btn" onclick="setFilter('seen')">WATCHED</button>
+    </div>
+  </div>
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+</div>
+
+<div id="toast"></div>
+<div id="content"></div>
+
+<!-- API key modal -->
+<div id="key-overlay" class="hidden" onclick="if(event.target===this)closeKeyModal()">
+  <div id="key-modal">
+    <div id="key-title">ANTHROPIC API KEY</div>
+    <div id="key-desc">The update feature calls the Anthropic API. Paste your API key below — it's saved locally on your device and never sent anywhere else.</div>
+    <input id="key-input" type="password" placeholder="sk-ant-..." spellcheck="false" autocomplete="off"/>
+    <div id="key-hint">Get a free key at <strong>console.anthropic.com</strong></div>
+    <div id="key-btns">
+      <button onclick="closeKeyModal()">CANCEL</button>
+      <button id="key-save-btn" onclick="saveKey()">SAVE &amp; UPDATE</button>
+    </div>
+    <div id="key-clear-wrap"><button id="key-clear-btn" onclick="clearKey()">Remove saved key</button></div>
+  </div>
+</div>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E8162E;--gold:#FFD700;--bg:#0A0A0A;
+  --card:#181818;--card-seen:#111;--border:#272727;--border-seen:#1e1e1e;
+  --text:#e8e8e8;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body{background:var(--bg);color:var(--text);font-family:'Barlow Condensed',sans-serif;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+body{background-image:radial-gradient(#1c1c1c 1px,transparent 1px);background-size:22px 22px}
+#header{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:4px solid #900;padding:calc(var(--safe-top) + 12px) 16px 12px}
+.header-row1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.header-row2{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-height:1}
+#stats{font-size:11px;font-weight:600;letter-spacing:1.5px;opacity:.85;margin-top:2px}
+.header-btns{display:flex;gap:6px;align-self:flex-start;padding-top:2px}
+#update-btn{
+  background:rgba(0,0,0,0.25);border:2px solid rgba(255,255,255,0.5);
+  color:#fff;font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:5px 11px;cursor:pointer;border-radius:2px;
+  transition:background .15s,opacity .15s;white-space:nowrap;
+}
+#update-btn:disabled{opacity:.5;cursor:not-allowed}
+#update-btn.loading{animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.filters{display:flex;gap:4px}
+.filter-btn{background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 10px;cursor:pointer;border-radius:2px;transition:background .15s}
+.filter-btn.active{background:rgba(0,0,0,.35)}
+#progress-bar{margin-top:10px;height:5px;background:rgba(0,0,0,.3);border-radius:3px;overflow:hidden}
+#progress-fill{height:100%;background:linear-gradient(90deg,#FFD700,#FFA500);border-radius:3px;transition:width .35s ease;width:0%}
+#content{max-width:680px;margin:0 auto;padding:24px 14px calc(var(--safe-bottom) + 60px)}
+/* Toast */
+#toast{position:fixed;bottom:calc(var(--safe-bottom) + 24px);left:50%;transform:translateX(-50%) translateY(20px);background:#222;border:1px solid #444;color:#e8e8e8;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.5px;padding:10px 20px;border-radius:4px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:200;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.success{border-color:var(--red);color:#fff}
+/* Phase */
+.phase-hdr{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--red);padding-bottom:7px;margin-bottom:10px;margin-top:30px}
+.phase-sec:first-child .phase-hdr{margin-top:0}
+.phase-lbl{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--red);letter-spacing:2px}
+.phase-sub{font-size:13px;color:#777;font-weight:600}
+.phase-cnt{margin-left:auto;font-size:13px;font-weight:700;color:var(--gold)}
+/* Items */
+.item{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--card);border:1px solid var(--border);border-radius:4px;margin-bottom:5px;user-select:none;-webkit-user-select:none;transition:opacity .2s}
+.item.exp{border-radius:4px 4px 0 0;margin-bottom:0}
+.item.watched{background:var(--card-seen);border-color:var(--border-seen);opacity:.5}
+.item.new-item{border-left:3px solid var(--gold)}
+.item-num{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#3a3a3a;min-width:26px;text-align:right;flex-shrink:0}
+.chk{width:19px;height:19px;flex-shrink:0;border-radius:3px;border:2px solid #3a3a3a;background:transparent;display:flex;align-items:center;justify-content:center;transition:all .15s;cursor:pointer}
+.item.watched .chk{border-color:var(--red);background:var(--red)}
+.chkmark{display:none}
+.item.watched .chkmark{display:block}
+.item-title{flex:1;font-size:15px;font-weight:600;letter-spacing:.3px;color:var(--text)}
+.item.watched .item-title{color:#4a4a4a;text-decoration:line-through}
+.ep-cnt{font-size:11px;font-weight:700;color:#484848;flex-shrink:0}
+.ep-cnt.partial{color:var(--gold);opacity:.8}
+.item-yr{font-size:11px;color:#444;font-weight:500;flex-shrink:0}
+.badge{font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 7px;border-radius:2px;min-width:52px;text-align:center;flex-shrink:0}
+.badge-movie{color:#60a5fa;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2)}
+.badge-series{color:#4ade80;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2)}
+.badge-special{color:#fb923c;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2)}
+.chevron{flex-shrink:0;color:#3a3a3a;transition:transform .2s,color .15s;display:flex;align-items:center;cursor:pointer;padding:4px}
+.item.exp .chevron{transform:rotate(180deg);color:#777}
+/* Episode panel */
+.ep-panel{background:#0e0e0e;border:1px solid #222;border-top:none;border-radius:0 0 4px 4px;padding:14px 14px 16px;margin-bottom:5px}
+.season-blk+.season-blk{margin-top:18px}
+.season-ttl{font-family:'Bebas Neue',sans-serif;font-size:12px;color:#444;letter-spacing:2px;margin-bottom:10px}
+.ep-grid{display:flex;flex-wrap:wrap;gap:8px}
+.ep-bub{width:40px;height:40px;border-radius:50%;border:2px solid #2a2a2a;background:transparent;color:#444;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0}
+.ep-bub:active{transform:scale(.88)}
+.ep-bub.seen{background:var(--red);border-color:var(--red);color:#fff}
+.ep-foot{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:11px;color:#3a3a3a;font-weight:600;letter-spacing:1px}
+.ep-bar{flex:1;height:3px;background:#1e1e1e;border-radius:2px;overflow:hidden}
+.ep-bar-fill{height:100%;background:var(--red);border-radius:2px;transition:width .2s}
+.hidden{display:none!important}
+#footer{text-align:center;font-size:10px;color:#282828;font-weight:600;letter-spacing:2px;margin-top:16px}
+
+/* API Key Modal */
+#key-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px}
+#key-modal{background:#161616;border:2px solid #333;border-radius:6px;padding:24px 20px;max-width:360px;width:100%}
+#key-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red);margin-bottom:10px}
+#key-desc{font-size:13px;color:#888;font-weight:500;line-height:1.5;margin-bottom:16px}
+#key-input{width:100%;background:#0a0a0a;border:2px solid #333;color:#e8e8e8;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;padding:10px 12px;border-radius:3px;outline:none;letter-spacing:.5px}
+#key-input:focus{border-color:var(--red)}
+#key-hint{font-size:11px;color:#555;font-weight:600;letter-spacing:.5px;margin-top:8px;margin-bottom:18px}
+#key-btns{display:flex;gap:8px}
+#key-btns button{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:9px;border-radius:3px;cursor:pointer}
+#key-btns button:first-child{background:transparent;border:2px solid #444;color:#888}
+#key-save-btn{background:var(--red);border:2px solid var(--red);color:#fff}
+#key-clear-wrap{margin-top:14px;text-align:center}
+#key-clear-btn{background:none;border:none;color:#444;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;text-decoration:underline}
+</style>
+
+<script>
+// ── STATIC DATA ───────────────────────────────────────
+var PHASES=[
+  {num:1,label:"Phase 1",sub:"The Infinity Saga Begins"},
+  {num:2,label:"Phase 2",sub:"Rising Threats"},
+  {num:3,label:"Phase 3",sub:"The Infinity War"},
+  {num:4,label:"Phase 4",sub:"The Multiverse Saga Begins"},
+  {num:5,label:"Phase 5",sub:"The Multiverse Saga"},
+];
+var BASE_ITEMS=[
+  {id:1, title:"Iron Man",                                        year:2008,type:"movie",  phase:1},
+  {id:2, title:"The Incredible Hulk",                             year:2008,type:"movie",  phase:1},
+  {id:3, title:"Iron Man 2",                                      year:2010,type:"movie",  phase:1},
+  {id:4, title:"Thor",                                            year:2011,type:"movie",  phase:1},
+  {id:5, title:"Captain America: The First Avenger",              year:2011,type:"movie",  phase:1},
+  {id:6, title:"The Avengers",                                    year:2012,type:"movie",  phase:1},
+  {id:7, title:"Iron Man 3",                                      year:2013,type:"movie",  phase:2},
+  {id:8, title:"Thor: The Dark World",                            year:2013,type:"movie",  phase:2},
+  {id:9, title:"Captain America: The Winter Soldier",             year:2014,type:"movie",  phase:2},
+  {id:10,title:"Guardians of the Galaxy",                         year:2014,type:"movie",  phase:2},
+  {id:11,title:"Avengers: Age of Ultron",                         year:2015,type:"movie",  phase:2},
+  {id:12,title:"Ant-Man",                                         year:2015,type:"movie",  phase:2},
+  {id:13,title:"Captain America: Civil War",                      year:2016,type:"movie",  phase:3},
+  {id:14,title:"Doctor Strange",                                  year:2016,type:"movie",  phase:3},
+  {id:15,title:"Guardians of the Galaxy Vol. 2",                 year:2017,type:"movie",  phase:3},
+  {id:16,title:"Spider-Man: Homecoming",                          year:2017,type:"movie",  phase:3},
+  {id:17,title:"Thor: Ragnarok",                                  year:2017,type:"movie",  phase:3},
+  {id:18,title:"Black Panther",                                   year:2018,type:"movie",  phase:3},
+  {id:19,title:"Avengers: Infinity War",                          year:2018,type:"movie",  phase:3},
+  {id:20,title:"Ant-Man and the Wasp",                            year:2018,type:"movie",  phase:3},
+  {id:21,title:"Captain Marvel",                                  year:2019,type:"movie",  phase:3},
+  {id:22,title:"Avengers: Endgame",                               year:2019,type:"movie",  phase:3},
+  {id:23,title:"Spider-Man: Far From Home",                       year:2019,type:"movie",  phase:3},
+  {id:24,title:"WandaVision",                                     year:2021,type:"series", phase:4},
+  {id:25,title:"The Falcon and the Winter Soldier",               year:2021,type:"series", phase:4},
+  {id:26,title:"Loki",                                            year:2021,type:"series", phase:4},
+  {id:27,title:"Black Widow",                                     year:2021,type:"movie",  phase:4},
+  {id:28,title:"What If...?",                                     year:2021,type:"series", phase:4},
+  {id:29,title:"Shang-Chi and the Legend of the Ten Rings",       year:2021,type:"movie",  phase:4},
+  {id:30,title:"Eternals",                                        year:2021,type:"movie",  phase:4},
+  {id:31,title:"Hawkeye",                                         year:2021,type:"series", phase:4},
+  {id:32,title:"Spider-Man: No Way Home",                         year:2021,type:"movie",  phase:4},
+  {id:33,title:"Moon Knight",                                     year:2022,type:"series", phase:4},
+  {id:34,title:"Doctor Strange in the Multiverse of Madness",     year:2022,type:"movie",  phase:4},
+  {id:35,title:"Ms. Marvel",                                      year:2022,type:"series", phase:4},
+  {id:36,title:"Thor: Love and Thunder",                          year:2022,type:"movie",  phase:4},
+  {id:37,title:"She-Hulk: Attorney at Law",                       year:2022,type:"series", phase:4},
+  {id:38,title:"Werewolf by Night",                               year:2022,type:"special",phase:4},
+  {id:39,title:"Black Panther: Wakanda Forever",                  year:2022,type:"movie",  phase:4},
+  {id:40,title:"Ant-Man and the Wasp: Quantumania",              year:2023,type:"movie",  phase:5},
+  {id:41,title:"Guardians of the Galaxy Vol. 3",                 year:2023,type:"movie",  phase:5},
+  {id:42,title:"Secret Invasion",                                 year:2023,type:"series", phase:5},
+  {id:43,title:"Loki Season 2",                                   year:2023,type:"series", phase:5},
+  {id:44,title:"The Marvels",                                     year:2023,type:"movie",  phase:5},
+  {id:45,title:"What If...? Season 2",                           year:2023,type:"series", phase:5},
+  {id:46,title:"Echo",                                            year:2024,type:"series", phase:5},
+  {id:47,title:"Agatha All Along",                                year:2024,type:"series", phase:5},
+  {id:48,title:"Deadpool & Wolverine",                            year:2024,type:"movie",  phase:5},
+  {id:49,title:"Your Friendly Neighborhood Spider-Man",           year:2025,type:"series", phase:5},
+  {id:50,title:"Captain America: Brave New World",                year:2025,type:"movie",  phase:5},
+  {id:51,title:"Daredevil: Born Again",                           year:2025,type:"series", phase:5},
+  {id:52,title:"Thunderbolts*",                                   year:2025,type:"movie",  phase:5},
+];
+var SD={
+  24:[{s:1,n:9}],25:[{s:1,n:6}],26:[{s:1,n:6}],28:[{s:1,n:9}],
+  31:[{s:1,n:6}],33:[{s:1,n:6}],35:[{s:1,n:6}],37:[{s:1,n:9}],
+  42:[{s:1,n:6}],43:[{s:2,n:6}],45:[{s:2,n:9}],46:[{s:1,n:5}],
+  47:[{s:1,n:9}],49:[{s:1,n:10}],51:[{s:1,n:9}],
+};
+var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"},special:{l:"SPECIAL",c:"badge-special"}};
+
+// ── STATE ─────────────────────────────────────────────
+var ms={},ep={},exp={},fil="all";
+var customItems=[];  // items added via update
+
+function allItems(){return BASE_ITEMS.concat(customItems);}
+
+function allPhases(){
+  var maxPhase=Math.max.apply(null,allItems().map(function(i){return i.phase;}));
+  var phases=PHASES.slice();
+  for(var p=6;p<=maxPhase;p++){
+    phases.push({num:p,label:"Phase "+p,sub:"New Content"});
+  }
+  return phases;
+}
+
+function load(){
+  try{
+    var d=JSON.parse(localStorage.getItem("mcu3")||"{}");
+    ms=d.ms||{};ep=d.ep||{};
+    customItems=d.customItems||[];
+    // Merge any custom series data
+    if(d.customSD){
+      Object.keys(d.customSD).forEach(function(k){SD[k]=d.customSD[k];});
+    }
+  }catch(e){}
+}
+function save(){
+  var customSD={};
+  customItems.forEach(function(item){
+    if(SD[item.id]) customSD[item.id]=SD[item.id];
+  });
+  try{localStorage.setItem("mcu3",JSON.stringify({ms:ms,ep:ep,customItems:customItems,customSD:customSD}));}catch(e){}
+}
+
+// ── LOGIC ─────────────────────────────────────────────
+function hasSeries(id){return !!SD[id];}
+function isSeen(item){
+  if(item.type!=="series"||!hasSeries(item.id))return !!ms[item.id];
+  return SD[item.id].every(function(s){
+    for(var e=1;e<=s.n;e++){if(!ep[item.id+"-"+s.s+"-"+e])return false;}
+    return true;
+  });
+}
+function getProgress(id){
+  var data=SD[id];if(!data)return null;
+  var done=0,total=0;
+  data.forEach(function(s){total+=s.n;for(var e=1;e<=s.n;e++){if(ep[id+"-"+s.s+"-"+e])done++;}});
+  return{done:done,total:total};
+}
+function toggleMovie(id){ms[id]=!ms[id];save();render();}
+function toggleSeries(id){
+  var item=allItems().find(function(i){return i.id===id;});
+  if(!hasSeries(id)){toggleMovie(id);return;}
+  var all=isSeen(item);
+  SD[id].forEach(function(s){for(var e=1;e<=s.n;e++)ep[id+"-"+s.s+"-"+e]=!all;});
+  save();render();
+}
+function toggleEp(id,s,e){var k=id+"-"+s+"-"+e;ep[k]=!ep[k];save();render();}
+function toggleExp(id){exp[id]=!exp[id];render();}
+function setFilter(f){
+  fil=f;
+  document.querySelectorAll(".filter-btn").forEach(function(b){
+    b.classList.toggle("active",b.getAttribute("onclick").indexOf("'"+f+"'")>-1);
+  });
+  applyFilter();
+}
+function applyFilter(){
+  document.querySelectorAll(".item").forEach(function(el){
+    var w=el.getAttribute("data-watched")==="1";
+    if(fil==="all")el.classList.remove("hidden");
+    else if(fil==="seen")el.classList.toggle("hidden",!w);
+    else el.classList.toggle("hidden",w);
+  });
+  document.querySelectorAll(".ep-panel").forEach(function(p){
+    var row=p.previousElementSibling;
+    p.classList.toggle("hidden",!!(row&&row.classList.contains("hidden")));
+  });
+  document.querySelectorAll(".phase-sec").forEach(function(s){
+    var any=Array.from(s.querySelectorAll(".item")).some(function(i){return !i.classList.contains("hidden");});
+    s.style.display=any?"":"none";
+  });
+}
+
+// ── API KEY MODAL ──────────────────────────────────────
+function openKeyModal(){
+  var k=localStorage.getItem("mcu-api-key")||"";
+  document.getElementById("key-input").value=k;
+  document.getElementById("key-clear-wrap").style.display=k?"":"none";
+  document.getElementById("key-overlay").classList.remove("hidden");
+  setTimeout(function(){document.getElementById("key-input").focus();},100);
+}
+function closeKeyModal(){document.getElementById("key-overlay").classList.add("hidden");}
+function saveKey(){
+  var k=document.getElementById("key-input").value.trim();
+  if(!k){showToast("Please enter a key");return;}
+  localStorage.setItem("mcu-api-key",k);
+  closeKeyModal();
+  runUpdate();
+}
+function clearKey(){
+  localStorage.removeItem("mcu-api-key");
+  document.getElementById("key-input").value="";
+  document.getElementById("key-clear-wrap").style.display="none";
+  showToast("API key removed");
+}
+
+// ── UPDATE VIA API ─────────────────────────────────────
+function checkForUpdates(){
+  var apiKey=localStorage.getItem("mcu-api-key");
+  if(!apiKey && window.location.hostname!=="claude.ai"){
+    openKeyModal(); return;
+  }
+  runUpdate();
+}
+
+async function runUpdate(){
+  var btn=document.getElementById("update-btn");
+  btn.textContent="⟳ CHECKING...";
+  btn.disabled=true;
+  btn.classList.add("loading");
+  try{
+    var headers={"Content-Type":"application/json"};
+    var apiKey=localStorage.getItem("mcu-api-key");
+    if(apiKey) headers["x-api-key"]=apiKey;
+
+    var currentTitles=allItems().map(function(i){return i.title;}).join(", ");
+    var res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:headers,
+      body:JSON.stringify({
+        model:"claude-sonnet-4-5",
+        max_tokens:1000,
+        tools:[{"type":"web_search_20250305","name":"web_search"}],
+        messages:[{role:"user",content:
+          "Search for any officially confirmed or released MCU movies, Disney+ series, or specials NOT already in this list: "+currentTitles+". "
+          +"Only include officially announced Marvel/Disney content. "
+          +"Reply with ONLY a raw JSON array (no markdown, no explanation). Format: "
+          +'[{"title":"...","year":2026,"type":"movie","phase":6}] '
+          +'type must be "movie", "series", or "special". '
+          +'For series add "seasons":[{"s":1,"n":6}] if episode count is known. '
+          +"Return exactly [] if nothing is new."
+        }]
+      })
+    });
+
+    if(!res.ok){
+      var errText=await res.text();
+      var msg="HTTP "+res.status;
+      try{var j=JSON.parse(errText);if(j.error&&j.error.message)msg=j.error.message;}catch(e){}
+      if(res.status===401||res.status===403){
+        showToast("Auth failed — check your API key");
+        openKeyModal(); return;
+      }
+      throw new Error(msg);
+    }
+
+    var data=await res.json();
+    if(data.type==="error") throw new Error((data.error&&data.error.message)||"API error");
+    if(!data.content||!data.content.length) throw new Error("Empty response from API");
+
+    var text=data.content.filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("");
+    text=text.replace(/```[a-z]*\n?/g,"").replace(/```/g,"");
+    var match=text.match(/\[[\s\S]*\]/);
+    if(!match) throw new Error("Response had no JSON list");
+    var newItems;
+    try{newItems=JSON.parse(match[0]);}
+    catch(e){throw new Error("Couldn't parse JSON: "+e.message);}
+
+    if(!Array.isArray(newItems)||newItems.length===0){showToast("Already up to date ✓");return;}
+
+    var existingTitles=allItems().map(function(i){return i.title.toLowerCase();});
+    var fresh=newItems.filter(function(item){
+      return item.title&&!existingTitles.includes(item.title.toLowerCase());
+    });
+    if(fresh.length===0){showToast("Already up to date ✓");return;}
+
+    var maxId=Math.max.apply(null,allItems().map(function(i){return i.id;}));
+    fresh.forEach(function(item,idx){
+      item.id=maxId+idx+1;
+      if(item.type==="series"&&Array.isArray(item.seasons)){
+        SD[item.id]=item.seasons.map(function(s){return{s:s.s,n:s.n};});
+      }
+      delete item.seasons;
+    });
+    customItems=customItems.concat(fresh);
+    save();render();
+    showToast("Added "+fresh.length+" new title"+(fresh.length>1?"s":"")+" ✓","success");
+
+  }catch(e){
+    showToast("Error: "+e.message);
+  }finally{
+    btn.textContent="⟳ UPDATE LIST";
+    btn.disabled=false;
+    btn.classList.remove("loading");
+  }
+}
+// ── TOAST ─────────────────────────────────────────────
+var toastTimer=null;
+function showToast(msg,type){
+  var t=document.getElementById("toast");
+  t.textContent=msg;
+  t.className="show"+(type?" "+type:"");
+  if(toastTimer)clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.className="";},3000);
+}
+
+// ── RENDER ─────────────────────────────────────────────
+function render(){
+  var st=document.documentElement.scrollTop||document.body.scrollTop;
+  var c=document.getElementById("content");
+  c.innerHTML="";
+  var items=allItems();
+  var phases=allPhases();
+
+  phases.forEach(function(phase){
+    var phaseItems=items.filter(function(i){return i.phase===phase.num;});
+    if(!phaseItems.length)return;
+    var seen=phaseItems.filter(function(i){return isSeen(i);}).length;
+
+    var sec=document.createElement("div");
+    sec.className="phase-sec";
+
+    var hdr=document.createElement("div");
+    hdr.className="phase-hdr";
+    hdr.innerHTML='<span class="phase-lbl">'+phase.label+'</span>'
+      +'<span class="phase-sub">'+phase.sub+'</span>'
+      +'<span class="phase-cnt">'+seen+'/'+phaseItems.length+'</span>';
+    sec.appendChild(hdr);
+
+    phaseItems.forEach(function(item){
+      var watched=isSeen(item);
+      var isSer=item.type==="series"&&hasSeries(item.id);
+      var isExp=!!exp[item.id];
+      var prog=isSer?getProgress(item.id):null;
+      var b=BADGE[item.type]||{l:"OTHER",c:"badge-special"};
+      var isNew=customItems.some(function(ci){return ci.id===item.id;});
+
+      var epHtml="";
+      if(prog){
+        var pcls=(prog.done>0&&prog.done<prog.total)?"ep-cnt partial":"ep-cnt";
+        epHtml='<span class="'+pcls+'">'+prog.done+'/'+prog.total+'</span>';
+      }
+      var chevHtml=isSer?'<span class="chevron" onclick="toggleExp('+item.id+')">'
+        +'<svg width="11" height="7" viewBox="0 0 11 7" fill="none">'
+        +'<path d="M1 1L5.5 6L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+        +'</svg></span>':"";
+
+      var row=document.createElement("div");
+      row.className="item"+(watched?" watched":"")+(isExp?" exp":"")+(isNew?" new-item":"");
+      row.setAttribute("data-watched",watched?"1":"0");
+      row.innerHTML=
+        '<span class="item-num">'+item.id+'</span>'
+        +'<div class="chk" onclick="event.stopPropagation();'+(isSer?"toggleSeries("+item.id+")":"toggleMovie("+item.id+")")+'">'
+        +'<svg class="chkmark" width="10" height="8" viewBox="0 0 10 8" fill="none">'
+        +'<path d="M1 3.5L3.8 7L9 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+        +'<span class="item-title"'+(isSer?' onclick="toggleExp('+item.id+')" style="cursor:pointer"':'')+'>'+item.title+'</span>'
+        +epHtml
+        +'<span class="item-yr">'+item.year+'</span>'
+        +'<span class="badge '+b.c+'">'+b.l+'</span>'
+        +chevHtml;
+      sec.appendChild(row);
+
+      if(isSer&&isExp){
+        var panel=document.createElement("div");
+        panel.className="ep-panel";
+        SD[item.id].forEach(function(season){
+          var blk=document.createElement("div");
+          blk.className="season-blk";
+          blk.innerHTML='<div class="season-ttl">SEASON '+season.s+'</div>';
+          var grid=document.createElement("div");
+          grid.className="ep-grid";
+          for(var e=1;e<=season.n;e++){
+            var key=item.id+"-"+season.s+"-"+e;
+            var bub=document.createElement("div");
+            bub.className="ep-bub"+(ep[key]?" seen":"");
+            bub.textContent=e;
+            bub.setAttribute("onclick","toggleEp("+item.id+","+season.s+","+e+")");
+            grid.appendChild(bub);
+          }
+          blk.appendChild(grid);
+          var p=getProgress(item.id);
+          var pct=p.total?Math.round(p.done/p.total*100):0;
+          var foot=document.createElement("div");
+          foot.className="ep-foot";
+          foot.innerHTML='<span>'+p.done+' of '+p.total+' episodes</span>'
+            +'<div class="ep-bar"><div class="ep-bar-fill" style="width:'+pct+'%"></div></div>';
+          blk.appendChild(foot);
+          panel.appendChild(blk);
+        });
+        sec.appendChild(panel);
+      }
+    });
+    c.appendChild(sec);
+  });
+
+  var foot=document.createElement("div");
+  foot.id="footer";
+  foot.textContent="MARVEL CINEMATIC UNIVERSE · "+items.length+" TITLES";
+  c.appendChild(foot);
+
+  var total=items.length;
+  var totalSeen=items.filter(function(i){return isSeen(i);}).length;
+  var pct=Math.round(totalSeen/total*100);
+  document.getElementById("stats").textContent=totalSeen+" / "+total+" WATCHED · "+pct+"%";
+  document.getElementById("progress-fill").style.width=pct+"%";
+  applyFilter();
+  requestAnimationFrame(function(){
+    document.documentElement.scrollTop=st;document.body.scrollTop=st;
+  });
+}
+
+load();render();
+</script>
+</body>
+</html>
