@@ -32,6 +32,13 @@
       <button class="filter-btn" onclick="setFilter('seen')">WATCHED</button>
     </div>
   </div>
+  <div class="header-row3">
+    <label class="type-chk active" data-type="movie"><input type="checkbox" checked onchange="toggleType('movie',this)"> FILM</label>
+    <label class="type-chk active" data-type="series"><input type="checkbox" checked onchange="toggleType('series',this)"> SERIES</label>
+    <label class="type-chk active" data-type="tv"><input type="checkbox" checked onchange="toggleType('tv',this)"> TV</label>
+    <label class="type-chk active" data-type="special"><input type="checkbox" checked onchange="toggleType('special',this)"> SPECIAL</label>
+    <label class="type-chk active" data-type="short"><input type="checkbox" checked onchange="toggleType('short',this)"> SHORT</label>
+  </div>
   <div id="progress-bar"><div id="progress-fill"></div></div>
 </div>
 
@@ -92,6 +99,12 @@ body{background-image:radial-gradient(#1c1c1c 1px,transparent 1px);background-si
 #header{position:sticky;top:0;z-index:100;background:var(--red);border-bottom:4px solid #900;padding:calc(var(--safe-top) + 12px) 16px 12px}
 .header-row1{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .header-row2{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.header-row3{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.type-chk{display:flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.4);cursor:pointer;user-select:none;-webkit-user-select:none;transition:color .15s;padding:3px 8px;border:2px solid rgba(255,255,255,.2);border-radius:2px}
+.type-chk input{display:none}
+.type-chk.active{color:rgba(255,255,255,.9);border-color:rgba(255,255,255,.5)}
+.type-chk::before{content:"";width:8px;height:8px;border-radius:50%;border:2px solid currentColor;flex-shrink:0;transition:background .15s}
+.type-chk.active::before{background:currentColor}
 h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-height:1}
 #stats{font-size:11px;font-weight:600;letter-spacing:1.5px;opacity:.85;margin-top:2px}
 .header-btns{display:flex;gap:6px;align-self:flex-start;padding-top:2px}
@@ -126,7 +139,7 @@ h1{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;line-he
 .item.exp{border-radius:4px 4px 0 0;margin-bottom:0}
 .item.watched{background:var(--card-seen);border-color:var(--border-seen);opacity:.5}
 .item.new-item{border-left:3px solid var(--gold)}
-.item-num{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#3a3a3a;min-width:26px;text-align:right;flex-shrink:0}
+
 .chk{width:19px;height:19px;flex-shrink:0;border-radius:3px;border:2px solid #3a3a3a;background:transparent;display:flex;align-items:center;justify-content:center;transition:all .15s;cursor:pointer}
 .item.watched .chk{border-color:var(--red);background:var(--red)}
 .chkmark{display:none}
@@ -358,6 +371,7 @@ var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"}
 
 // ── STATE ─────────────────────────────────────────────
 var ms={},ep={},exp={},fil="all";
+var activeTypes={movie:true,series:true,tv:true,special:true,short:true};
 var sc={};  // scores: {"movie-ID": 7.9, "ep-ID-S-E": 8.2}
 var customItems=[];  // items added via update
 
@@ -422,6 +436,13 @@ function toggleSeries(id){
 }
 function toggleEp(id,s,e){var k=id+"-"+s+"-"+e;ep[k]=!ep[k];save();render();}
 function toggleExp(id){exp[id]=!exp[id];render();}
+function toggleType(type,el){
+  activeTypes[type]=el.checked;
+  var label=el.closest(".type-chk");
+  if(label) label.classList.toggle("active",el.checked);
+  applyFilter();
+}
+
 function setFilter(f){
   fil=f;
   document.querySelectorAll(".filter-btn").forEach(function(b){
@@ -432,9 +453,10 @@ function setFilter(f){
 function applyFilter(){
   document.querySelectorAll(".item").forEach(function(el){
     var w=el.getAttribute("data-watched")==="1";
-    if(fil==="all")el.classList.remove("hidden");
-    else if(fil==="seen")el.classList.toggle("hidden",!w);
-    else el.classList.toggle("hidden",w);
+    var t=el.getAttribute("data-type");
+    var typeHidden=t&&activeTypes[t]===false;
+    var watchHidden=(fil==="seen"&&!w)||(fil==="unseen"&&w);
+    el.classList.toggle("hidden",typeHidden||watchHidden);
   });
   document.querySelectorAll(".ep-panel").forEach(function(p){
     var row=p.previousElementSibling;
@@ -818,7 +840,6 @@ function render(){
   c.innerHTML="";
   var items=allItems();
   var phases=allPhases();
-  var renderIdx=0;
 
   phases.forEach(function(phase){
     var phaseItems=items.filter(function(i){return i.phase===phase.num;});
@@ -836,7 +857,6 @@ function render(){
     sec.appendChild(hdr);
 
     phaseItems.forEach(function(item){
-      renderIdx++;
       var watched=isSeen(item);
       var isSer=(item.type==="series"||item.type==="tv")&&hasSeries(item.id);
       var isExp=!!exp[item.id];
@@ -856,9 +876,10 @@ function render(){
 
       var row=document.createElement("div");
       row.className="item"+(watched?" watched":"")+(isExp?" exp":"")+(isNew?" new-item":"");
+      row.setAttribute("data-type",item.type);
       row.setAttribute("data-watched",watched?"1":"0");
       row.innerHTML=
-        '<span class="item-num">'+renderIdx+'</span>'
+        ''
         +'<div class="chk" onclick="event.stopPropagation();'+(isSer?"toggleSeries("+item.id+")":"toggleMovie("+item.id+")")+'">'
         +'<svg class="chkmark" width="10" height="8" viewBox="0 0 10 8" fill="none">'
         +'<path d="M1 3.5L3.8 7L9 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
