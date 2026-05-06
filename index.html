@@ -35,7 +35,7 @@
   <div class="header-row3">
     <label class="type-chk active" data-type="movie"><input type="checkbox" checked onchange="toggleType('movie',this)"> FILM</label>
     <label class="type-chk active" data-type="series"><input type="checkbox" checked onchange="toggleType('series',this)"> SERIES</label>
-    <label class="type-chk active" data-type="tv"><input type="checkbox" checked onchange="toggleType('tv',this)"> TV</label>
+    <label class="type-chk" data-type="tv"><input type="checkbox" onchange="toggleType('tv',this)"> TV</label>
     <label class="type-chk active" data-type="special"><input type="checkbox" checked onchange="toggleType('special',this)"> SPECIAL</label>
     <label class="type-chk active" data-type="short"><input type="checkbox" checked onchange="toggleType('short',this)"> SHORT</label>
   </div>
@@ -316,6 +316,7 @@ var BASE_ITEMS=[
   {id:69,title:"Ironheart",                                         year:2025,type:"series", phase:6},
   {id:70,title:"Eyes of Wakanda",                                   year:2025,type:"series", phase:6},
   {id:71,title:"Marvel Zombies",                                    year:2025,type:"series", phase:6},
+  {id:88,title:"Daredevil: Born Again Season 2",                    year:2026,type:"series", phase:6},
   // ── Marvel Television (Netflix + ABC) ─────────────────────────────
   // Phase 2
   {id:72,title:"Agents of S.H.I.E.L.D.",                           year:2013,type:"tv",     phase:2},
@@ -349,6 +350,7 @@ var SD={
   69:[{s:1,n:6}],   // Ironheart
   70:[{s:1,n:4}],   // Eyes of Wakanda
   71:[{s:1,n:4}],   // Marvel Zombies
+  88:[{s:2,n:8}],   // Daredevil: Born Again S2
   // Marvel Television
   72:[{s:1,n:22},{s:2,n:22},{s:3,n:22},{s:4,n:22},{s:5,n:22},{s:6,n:13},{s:7,n:13}], // AoS
   73:[{s:1,n:13}], // Daredevil S1
@@ -371,7 +373,7 @@ var BADGE={movie:{l:"FILM",c:"badge-movie"},series:{l:"SERIES",c:"badge-series"}
 
 // ── STATE ─────────────────────────────────────────────
 var ms={},ep={},exp={},fil="all";
-var activeTypes={movie:true,series:true,tv:true,special:true,short:true};
+var activeTypes={movie:true,series:true,tv:false,special:true,short:true};
 var sc={};  // scores: {"movie-ID": 7.9, "ep-ID-S-E": 8.2}
 var customItems=[];  // items added via update
 
@@ -504,10 +506,11 @@ function renderNextRelease(){
 // ── KNOWN UPCOMING RELEASES ───────────────────────────
 // Update this list as new MCU content is announced
 var UPCOMING = [
-  {title:"Spider-Man: Brand New Day",   date:"2026-07-31"},
-  {title:"The Punisher: One Last Kill", date:"2026-05-12"},
-  {title:"Avengers: Doomsday",          date:"2026-12-18"},
-  {title:"Avengers: Secret Wars",       date:"2027-12-17"},
+  {title:"Spider-Man: Brand New Day",         date:"2026-07-31"},
+  {title:"The Punisher: One Last Kill",       date:"2026-05-12"},
+  {title:"Avengers: Doomsday",               date:"2026-12-18"},
+  {title:"Daredevil: Born Again Season 3",   date:"2027-01-01"},
+  {title:"Avengers: Secret Wars",            date:"2027-12-17"},
 ];
 
 function getNextUpcoming(){
